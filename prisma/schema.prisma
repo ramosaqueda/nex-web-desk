@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Fiscalia {
+  id        Int      @id @default(autoincrement())
+  cod_fiscalia Int @unique  
+  gls_fiscalia      String   @unique
+  fiscal_jefe     String?
+  adm  String?
+  dir String?
+  custodio String?
+  path_saf String?
+  cta_asignacion String?
+  users     User[]
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String   @unique  
+  name      String?
+  role      Role     @default(USER)
+  rut       String?  @unique 
+  fiscalia  Fiscalia? @relation(fields: [fiscaliaId], references: [id])
+  fiscaliaId Int?
+ 
+}
+
+
+
+
+
+
+
+model SytemGroup {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name      String   @unique
+  icon      String?
+  subtitle  String?
+  description String?
+  img_background String?
+  systems   System[] 
+}
+
+model System {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name      String   @unique
+  icon      String?
+  group     SytemGroup? @relation(fields: [groupId], references: [id])
+  groupId   Int?
+
+}
+
+ 
+
