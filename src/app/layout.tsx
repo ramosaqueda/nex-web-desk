@@ -2,13 +2,15 @@ import { Montserrat } from "next/font/google";
 import "material-symbols";
 import ClientProcessor from "@/molecules/clientProcessor/ClientProcessor";
 import Navbar from "@/molecules/Navbar/Navbar";
-import Sidebar from "@molecules/Sidebar/Sidebar";
+
+import Categories from "@molecules/categories/Categories/Categories";
 import LoginModal from "@molecules/modals/LoginModal";
 import RegisterModal from "@molecules/modals/RegisterModal";
 import ToasterProvider from "@providers/ToasterProvider";
 
 import "./globals.css";
 import type { Metadata } from "next";
+
 
 export const metadata: Metadata = {
   title: "NextWebDesktop",
@@ -28,8 +30,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <LoginModal />
           <RegisterModal />
           <Navbar />
+          <Categories />
           {children}
-          <Sidebar />
+         
         </ClientProcessor>
       </body>
     </html>
