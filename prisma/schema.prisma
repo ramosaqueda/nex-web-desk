@@ -42,10 +42,6 @@ model User {
 
 
 
-
-
-
-
 model SytemGroup {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
